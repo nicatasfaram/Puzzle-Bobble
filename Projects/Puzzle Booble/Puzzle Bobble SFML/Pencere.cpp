@@ -1,4 +1,5 @@
 #include "Pencere.hpp"
+#include <iostream>
 
 Pencere::Pencere()
 {
@@ -29,7 +30,20 @@ void Pencere::olayKontrol()
 		if (olay.type == sf::Event::Closed)
 			m_pencere.close();
 	}
+
+	if (olay.type == sf::Event::KeyPressed)
+	{
+		for (auto siradaki : m_tusBasmaFonkListesi)
+			siradaki(olay.key.code);
+	}
 }
+
+void Pencere::tusBasilmaFonksiyonuEkle(KlavyeFonksiyonu yeniFonk)
+{
+	m_tusBasmaFonkListesi.push_back(yeniFonk);
+}
+
+
 void Pencere::ciz(sf::Drawable& sekil)
 {
 	m_pencere.draw(sekil);

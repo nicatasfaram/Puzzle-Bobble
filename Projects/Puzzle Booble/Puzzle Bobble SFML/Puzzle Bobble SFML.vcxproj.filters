@@ -24,10 +24,10 @@
     <ClCompile Include="Pencere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Izgara.cpp">
+    <ClCompile Include="Cizilebilir.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cizilebilir.hpp">
+    <ClCompile Include="Bubble.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,7 +38,10 @@
     <ClInclude Include="Pencere.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Izgara.hpp">
+    <ClInclude Include="Bubble.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TemelTurler.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -143,16 +143,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bubble.cpp" />
     <ClCompile Include="Cizilebilir.hpp" />
-    <ClCompile Include="Izgara.cpp" />
     <ClCompile Include="Oyun.cpp" />
     <ClCompile Include="Pencere.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Izgara.hpp" />
+    <ClInclude Include="Bubble.hpp" />
     <ClInclude Include="Oyun.hpp" />
     <ClInclude Include="Pencere.hpp" />
+    <ClInclude Include="TemelTurler.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,6 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include"TemelTurler.hpp"
 
 class Pencere
 {
@@ -12,7 +13,12 @@ public:
 	void cizimiBitir();
 	bool acikmi();
 	void olayKontrol();
+
+	void tusBasilmaFonksiyonuEkle(KlavyeFonksiyonu yeniFonk);
+
 	void ciz(sf::Drawable& sekil);
 private:
+
 	sf::RenderWindow m_pencere;
+	KlavyeFonksiyonListesi	m_tusBasmaFonkListesi;
 };
