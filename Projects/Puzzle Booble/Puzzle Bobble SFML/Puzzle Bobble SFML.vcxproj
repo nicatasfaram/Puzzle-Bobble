@@ -145,12 +145,14 @@
   <ItemGroup>
     <ClCompile Include="Bubble.cpp" />
     <ClCompile Include="Cizilebilir.hpp" />
+    <ClCompile Include="ColorBubbles.cpp" />
     <ClCompile Include="Oyun.cpp" />
     <ClCompile Include="Pencere.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bubble.hpp" />
+    <ClInclude Include="ColorBubbles.hpp" />
     <ClInclude Include="Oyun.hpp" />
     <ClInclude Include="Pencere.hpp" />
     <ClInclude Include="TemelTurler.hpp" />

@@ -38,6 +38,7 @@ void Pencere::olayKontrol()
 	}
 }
 
+
 void Pencere::tusBasilmaFonksiyonuEkle(KlavyeFonksiyonu yeniFonk)
 {
 	m_tusBasmaFonkListesi.push_back(yeniFonk);

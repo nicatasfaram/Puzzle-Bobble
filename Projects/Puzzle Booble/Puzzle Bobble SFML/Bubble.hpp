@@ -15,8 +15,14 @@ public:
 	float m_yaricap;
 	sf::Color m_renk;
 
+	bool isDestroyed();
+
+	void destroy();
+	void unDestroy();
+
+
 
 private:
 
-
+	bool m_destroyed;
 };
