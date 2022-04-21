@@ -4,17 +4,6 @@
 
 #define PI 3.14159265
 
-//Bubble bubble_red1;
-//Bubble bubble_red2;
-//
-//Bubble bubble_green1;
-//Bubble bubble_green2;
-//
-//Bubble bubble_blue1;
-//Bubble bubble_blue2;
-
-
-
 
 Oyun::Oyun()
 {
@@ -69,6 +58,10 @@ void Oyun::oyunuBaslat(unsigned int genislik, unsigned int yukseklik)
 				m_shootBubble.m_konum += m_shootBubbleSpeed;
 			}
 
+			if (m_colorBubbles.tasmaVarmi())
+				oyunuKapat();
+
+
 			cizimFonksiyonu();
 			m_saat.restart();
 		}
@@ -88,16 +81,6 @@ void Oyun::oyunuAyarla()
 
 	createShootBubble();
 
-	//m_colorBubbles.ayarla(40.0f, m_genislik, m_yukseklik);
-
-	//m_colorBubbles.addBubbles(sf::Color::Red, sf::Vector2f(0.0, 0.0));
-	//m_colorBubbles.addBubbles(sf::Color::Blue, sf::Vector2f(56.0, 34.0));
-	//m_colorBubbles.addBubbles(sf::Color::Yellow, sf::Vector2f(76.0, 122.0));
-	//m_colorBubbles.addBubbles(sf::Color::White, sf::Vector2f(200.0, 20.0));
-	//m_colorBubbles.addBubbles(sf::Color::Green, sf::Vector2f(357.0, 10.0));
-	//m_colorBubbles.addBubbles(sf::Color::Cyan, sf::Vector2f(120.0, 400.0));
-
-
 	aimAyarla();
 
 	m_rotation = 180.0f;
@@ -105,22 +88,6 @@ void Oyun::oyunuAyarla()
 
 	olaylariBagla();
 
-
-	/*bubble_red1.ayarla(40.0f, sf::Color::Red);
-	bubble_red1.m_konum = sf::Vector2f(0.0f, 0.0f);
-	bubble_red2.ayarla(40.0f, sf::Color::Red);
-	bubble_red2.m_konum = sf::Vector2f(80.0f, 0.0f);
-
-	bubble_green1.ayarla(40.0f, sf::Color::Green);
-	bubble_green1.m_konum = sf::Vector2f(40.0f, sqrt(3) / 2 * 80.0f);
-	bubble_green2.ayarla(40.0f, sf::Color::Green);
-	bubble_green2.m_konum = sf::Vector2f(120.0f, sqrt(3) / 2 * 80.0f);
-
-	bubble_blue1.ayarla(40.0f, sf::Color::Blue);
-	bubble_blue1.m_konum = sf::Vector2f(0.0f, 2 * (sqrt(3) / 2 * 80.0f));
-	bubble_blue2.ayarla(40.0f, sf::Color::Blue);
-	bubble_blue2.m_konum = sf::Vector2f(80.0f, 2 * (sqrt(3) / 2 * 80.0f));*/
-		
 }
 
 void Oyun::olaylariBagla()
@@ -184,21 +151,17 @@ void Oyun::cizimFonksiyonu()
 {
 	m_pencere.cizimeBasla();
 
-
 	m_colorBubbles.ciz(m_pencere);
-
-	/*bubble_red1.ciz(m_pencere);
-	bubble_red2.ciz(m_pencere);
-	
-	bubble_green1.ciz(m_pencere);
-	bubble_green2.ciz(m_pencere);
-
-	bubble_blue1.ciz(m_pencere);
-	bubble_blue2.ciz(m_pencere);*/
 
 	m_shootBubble.ciz(m_pencere);
 	
 	m_pencere.ciz(m_aim);
 
 	m_pencere.cizimiBitir();
+}
+
+
+void Oyun::oyunuKapat()
+{
+	m_pencere.kapat();
 }

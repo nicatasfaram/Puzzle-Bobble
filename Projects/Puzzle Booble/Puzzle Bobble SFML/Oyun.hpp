@@ -16,6 +16,7 @@ public:
 	void oyunuAyarla();
 	void olaylariBagla();
 	void cizimFonksiyonu();
+	void oyunuKapat();
 
 
 private:

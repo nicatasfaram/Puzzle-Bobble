@@ -4,59 +4,6 @@
 #include <math.h>
 #include <iostream>
 
-//ColorBubbles::ColorBubbles()
-//{
-//	srand(time(NULL));
-//	
-//	sf::Color bubbleColor;
-//
-//	for (int i = 0; i < 6; i++)
-//	{
-//		for (int j = 0; j < 6; j++)
-//		{
-//			m_randColor = rand() % 5;
-//			if (m_randColor == 0)
-//				bubbleColor = sf::Color::Red;
-//			else if (m_randColor == 1)
-//				bubbleColor = sf::Color::Green;
-//			else if (m_randColor == 2)
-//				bubbleColor = sf::Color::Blue;
-//			else if (m_randColor == 3)
-//				bubbleColor = sf::Color::Yellow;
-//			else
-//				bubbleColor = sf::Color::White;
-//
-//			m_colorBubbles[i][j] = new Bubble();
-//			m_colorBubbles[i][j]->ayarla(40.0f, bubbleColor);
-//
-//
-//			if((j + 1) % 2 == 0)
-//				m_colorBubbles[i][j]->m_konum = sf::Vector2f((i*80.0f) + 40.0f, j*(sqrt(3) / 2 * 80.0f));
-//			else
-//			m_colorBubbles[i][j]->m_konum = sf::Vector2f(i * 80.0f, j * (sqrt(3) / 2 * 80.0f));
-//		}
-//	}
-//}
-//
-//void ColorBubbles::ciz(Pencere& pencere)
-//{
-//	for (int i = 0; i < 6; i++)
-//	{
-//		for (int j = 0; j < 6; j++)
-//		{
-//			m_colorBubbles[i][j]->ciz(pencere);
-//		}
-//	}
-//}
-//
-//void ColorBubbles::addBubbles(sf::Color renk, sf::Vector2f konum)
-//{
-//
-//	
-//
-//
-//}
-
 ColorBubbles::ColorBubbles()
 {
 	srand(time(NULL));
@@ -71,21 +18,20 @@ ColorBubbles::ColorBubbles()
 		for (int j = 0; j < 6; j++)
 		{
 			m_randColor = rand() % 5;
-			
-			Bubble newBubble; 
+
+			Bubble newBubble;
 			newBubble.ayarla(40.0f, Colors[m_randColor]);
 
 			if ((i + 1) % 2 == 0)
 				newBubble.m_konum = sf::Vector2f((j * 80.0f) + 80.0f, i * (sqrt(3) / 2 * 80.0f) + 40.0f);
 			else
-				newBubble.m_konum= sf::Vector2f(j * 80.0f + 40.0f, i * (sqrt(3) / 2 * 80.0f) + 40.0f);
+				newBubble.m_konum = sf::Vector2f(j * 80.0f + 40.0f, i * (sqrt(3) / 2 * 80.0f) + 40.0f);
 
-			if (i >= 6)
+			if (i >= 4)
 				newBubble.destroy();
 
 			newVector.push_back(newBubble);
 		}
-		//m_satirSayisi++;
 
 		array.push_back(newVector);
 	}
@@ -98,7 +44,7 @@ void ColorBubbles::ciz(Pencere& pencere)
 {
 	for (int i = 0; i < m_satirSayisi; i++) {
 		for (int j = 0; j < 6; j++) {
-			if(!array[i][j].isDestroyed()) array[i][j].ciz(pencere);
+			if (!array[i][j].isDestroyed()) array[i][j].ciz(pencere);
 		}
 	}
 }
@@ -116,36 +62,94 @@ bool ColorBubbles::collideShotBubble(Bubble& shotBubble)
 
 				if (distance <= shotBubble.m_yaricap + array[i][j].m_yaricap) {
 
-					/*Bubble newBubble = shotBubble;
+					if (shotBubble.m_konum.x < array[i][j].m_konum.x)
+					{
+						if ((i + 1) % 2 == 0)
+						{
+							array[i + 1][j].m_sekil.setFillColor(shotBubble.m_renk);
+							array[i + 1][j].unDestroy();
+							clusterDestroy(i + 1, j);
+						}
 
-					newBubble.m_konum.x = j * 80.0;
-					*/
-					array[i + 1][j] = shotBubble;
-					
+						else {
+							array[i + 1][j - 1].m_sekil.setFillColor(shotBubble.m_renk);
+							array[i + 1][j - 1].unDestroy();
+							clusterDestroy(i + 1, j - 1);
+						}
+					}
+
+					if (shotBubble.m_konum.x >= array[i][j].m_konum.x && j<5)
+					{
+						if ((i + 1) % 2 == 0)
+						{
+							array[i + 1][j + 1].m_sekil.setFillColor(shotBubble.m_renk);
+							array[i + 1][j + 1].unDestroy();
+							clusterDestroy(i + 1, j + 1);
+						}
+
+						else {
+							array[i + 1][j].m_sekil.setFillColor(shotBubble.m_renk);
+							array[i + 1][j].unDestroy();
+							clusterDestroy(i + 1, j);
+						}
+					}
 					return true;
 				}
 			}
 		}
-		
+
 	}
 	return false;
 }
 
-//void ColorBubbles::addBubbles(sf::Color renk, sf::Vector2f konum)
-//{
-//	int sutun = konum.x / (2 * m_yaricap);
-//	int satir = konum.y / (2 * m_yaricap);
-//
-//	Bubble bubble;
-//	bubble.ayarla(m_yaricap, renk);
-//	bubble.m_konum = sf::Vector2f(sutun * 2 * m_yaricap + m_yaricap,
-//								satir * 2 * m_yaricap + m_yaricap);
-//
-//}
+bool ColorBubbles::tasmaVarmi()
+{
+	for (int j = 0; j < 6; j++) {
 
-//void ColorBubbles::ayarla(float yaricap, int pencereGenisligi, int pencereYuksekligi)
-//{
-//	m_sutunSayisi = pencereGenisligi / (2 * (int)yaricap);
-//	m_satirSayisi = pencereYuksekligi / (2 * (int)yaricap);
-//	m_yaricap = yaricap;
-//}
+		if (!array[9][j].isDestroyed())
+			return true;
+	}
+	return false;
+}
+
+void ColorBubbles::clusterDestroy(int i, int j, sf::Color targetColor)
+{
+	if (i < 0) return;
+	if (i >= m_satirSayisi) return;
+	if (j < 0) return;
+	if (j >= 6) return;
+	if (this->array[i][j].isDestroyed()) return;
+	if (this->array[i][j].m_sekil.getFillColor() != targetColor) return;
+
+	// if function is still going after these if statements then current ball is part of the cluster
+	
+	this->array[i][j].destroy();
+
+	this->clusterDestroy(i, j - 1, targetColor);
+	this->clusterDestroy(i, j + 1, targetColor);
+	this->clusterDestroy(i + 1, j, targetColor);
+	this->clusterDestroy(i - 1, j, targetColor);
+	this->clusterDestroy(i - 1, j-1, targetColor);
+	this->clusterDestroy(i - 1, j+1, targetColor);
+
+
+}
+
+bool ColorBubbles::clusterDestroy(int i, int j) {
+
+	sf::Color targetColor = this->array[i][j].m_sekil.getFillColor();
+
+	// if cluster contains at least 2 balls of the same color, ammo will make it 3 so destroy that cluster
+	if ((i > 0 && !array[i - 1][j].isDestroyed() && array[i - 1][j].m_sekil.getFillColor() == targetColor)
+		|| (i < m_satirSayisi && !array[i + 1][j].isDestroyed() && array[i + 1][j].m_sekil.getFillColor() == targetColor)
+		|| (j > 0 && !array[i][j - 1].isDestroyed() && array[i][j - 1].m_sekil.getFillColor() == targetColor)
+		|| (j < 5 && !array[i][j + 1].isDestroyed() && array[i][j + 1].m_sekil.getFillColor() == targetColor)
+		|| (i > 0 && j > 0 && !array[i - 1][j - 1 ].isDestroyed() && array[i - 1][j - 1].m_sekil.getFillColor() == targetColor)
+		|| (i > 0 && j < 5 && !array[i - 1][j + 1 ].isDestroyed() && array[i - 1][j + 1].m_sekil.getFillColor() == targetColor)) {
+
+		clusterDestroy(i, j, targetColor);
+
+		return true;
+	}
+	return false;
+}

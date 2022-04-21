@@ -14,6 +14,8 @@ public:
 	bool acikmi();
 	void olayKontrol();
 
+	void kapat();
+
 	void tusBasilmaFonksiyonuEkle(KlavyeFonksiyonu yeniFonk);
 
 	void ciz(sf::Drawable& sekil);

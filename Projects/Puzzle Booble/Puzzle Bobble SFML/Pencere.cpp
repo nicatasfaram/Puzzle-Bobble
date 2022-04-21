@@ -49,3 +49,8 @@ void Pencere::ciz(sf::Drawable& sekil)
 {
 	m_pencere.draw(sekil);
 }
+
+void Pencere::kapat()
+{
+	m_pencere.close();
+}

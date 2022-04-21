@@ -14,6 +14,10 @@ public:
 	bool collideShotBubble(Bubble &shotBubble);
 
 
+	bool tasmaVarmi();
+
+	bool clusterDestroy(int i, int j);
+
 
 	//void addBubbles(sf::Color renk, sf::Vector2f konum);
 
@@ -23,11 +27,11 @@ public:
 
 private:
 
-	//float		m_yaricap;
+	void		clusterDestroy(int i, int j, sf::Color color);
+
 	int			m_randColor;
 	
 	int			m_satirSayisi;
-	//int			m_sutunSayisi;
 
 	std::vector<std::vector<Bubble>> array;
 
