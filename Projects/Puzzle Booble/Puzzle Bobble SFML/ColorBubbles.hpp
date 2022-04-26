@@ -33,6 +33,8 @@ private:
 	
 	int			m_satirSayisi;
 
+	int			m_clusterSize;
+
 	std::vector<std::vector<Bubble>> array;
 
 	sf::Color Colors[5] = {	sf::Color::Yellow,

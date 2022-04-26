@@ -68,13 +68,15 @@ bool ColorBubbles::collideShotBubble(Bubble& shotBubble)
 						{
 							array[i + 1][j].m_sekil.setFillColor(shotBubble.m_renk);
 							array[i + 1][j].unDestroy();
-							clusterDestroy(i + 1, j);
+							if(!tasmaVarmi())
+								clusterDestroy(i + 1, j);
 						}
 
 						else {
 							array[i + 1][j - 1].m_sekil.setFillColor(shotBubble.m_renk);
 							array[i + 1][j - 1].unDestroy();
-							clusterDestroy(i + 1, j - 1);
+							if(!tasmaVarmi())
+								clusterDestroy(i + 1, j - 1);
 						}
 					}
 
@@ -84,15 +86,26 @@ bool ColorBubbles::collideShotBubble(Bubble& shotBubble)
 						{
 							array[i + 1][j + 1].m_sekil.setFillColor(shotBubble.m_renk);
 							array[i + 1][j + 1].unDestroy();
-							clusterDestroy(i + 1, j + 1);
+							if(!tasmaVarmi())
+								clusterDestroy(i + 1, j + 1);
 						}
 
 						else {
 							array[i + 1][j].m_sekil.setFillColor(shotBubble.m_renk);
 							array[i + 1][j].unDestroy();
-							clusterDestroy(i + 1, j);
+							if (!tasmaVarmi())
+								clusterDestroy(i + 1, j);
 						}
 					}
+
+					if (shotBubble.m_konum.x >= array[i][j].m_konum.x && j == 5 ) {
+						
+							array[i + 1][j].m_sekil.setFillColor(shotBubble.m_renk);
+							array[i + 1][j].unDestroy();
+							if (!tasmaVarmi())
+								clusterDestroy(i + 1, j);
+					}
+
 					return true;
 				}
 			}
@@ -118,8 +131,8 @@ void ColorBubbles::clusterDestroy(int i, int j, sf::Color targetColor)
 	if (i >= m_satirSayisi) return;
 	if (j < 0) return;
 	if (j >= 6) return;
-	if (this->array[i][j].isDestroyed()) return;
-	if (this->array[i][j].m_sekil.getFillColor() != targetColor) return;
+	if (array[i][j].isDestroyed()) return;
+	if (array[i][j].m_sekil.getFillColor() != targetColor) return;
 
 	// if function is still going after these if statements then current ball is part of the cluster
 	
@@ -128,9 +141,13 @@ void ColorBubbles::clusterDestroy(int i, int j, sf::Color targetColor)
 	this->clusterDestroy(i, j - 1, targetColor);
 	this->clusterDestroy(i, j + 1, targetColor);
 	this->clusterDestroy(i + 1, j, targetColor);
+	this->clusterDestroy(i + 1, j-1, targetColor);
+	this->clusterDestroy(i + 1, j+1, targetColor);
+
 	this->clusterDestroy(i - 1, j, targetColor);
 	this->clusterDestroy(i - 1, j-1, targetColor);
 	this->clusterDestroy(i - 1, j+1, targetColor);
+
 
 
 }
@@ -147,6 +164,7 @@ bool ColorBubbles::clusterDestroy(int i, int j) {
 		|| (i > 0 && j > 0 && !array[i - 1][j - 1 ].isDestroyed() && array[i - 1][j - 1].m_sekil.getFillColor() == targetColor)
 		|| (i > 0 && j < 5 && !array[i - 1][j + 1 ].isDestroyed() && array[i - 1][j + 1].m_sekil.getFillColor() == targetColor)) {
 
+		m_clusterSize = 1;
 		clusterDestroy(i, j, targetColor);
 
 		return true;
